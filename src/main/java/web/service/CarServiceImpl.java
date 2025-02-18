@@ -18,16 +18,16 @@ public class CarServiceImpl implements CarService {
     );
 
     public  List<Car> getCars(int count) {
-        List<Car> cars1 = new ArrayList<Car>();
+        List<Car> carsList = new ArrayList<Car>();
         if (count > 0) {
             if (count > 5) {
                 count = 5;
             }
             for (int i = 0; i < count; i++) {
-                cars1.add(cars.get(i));
+                carsList.add(cars.get(i));
 
             }
-            return cars1;
+            return carsList;
         } else {
             return null;
         }
