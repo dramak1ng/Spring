@@ -4,8 +4,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
+import java.util.logging.Logger;
+
 @Component
 public class AnimalsCage {
+    Logger logger = Logger.getLogger(getClass().getName());
 
     @Qualifier("dog")
     @Autowired
@@ -15,11 +18,11 @@ public class AnimalsCage {
 
 
     public void whatAnimalSay() {
-        System.out.println("Say:");
-        System.out.println(animal.toString());
-        System.out.println("At:");
-        System.out.println(new Timer().getTime());
-        System.out.println("________________________");
+        logger.info("Say:");
+        logger.info(animal.toString());
+        logger.info("At:");
+        logger.info(String.valueOf(new Timer().getTime()));
+        logger.info("________________________");
     }
     public Timer getTimer() {
         return timer;
