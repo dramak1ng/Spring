@@ -1,4 +1,5 @@
 package hiber.model;
+
 import javax.persistence.*;
 import java.io.Serializable;
 
@@ -10,7 +11,6 @@ public class User implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-
 
 
     @Column(name = "name")
@@ -34,7 +34,8 @@ public class User implements Serializable {
         this.lastName = lastName;
         this.email = email;
     }
-    public User( String firstName, String lastName, String email, Car car) {
+
+    public User(String firstName, String lastName, String email, Car car) {
         this(firstName, lastName, email);
         this.car = car;
 
@@ -71,8 +72,13 @@ public class User implements Serializable {
     public void setEmail(String email) {
         this.email = email;
     }
+
     public Car getCar() {
         return car;
+    }
+
+    public void setCar(Car car) {
+        this.car = car;
     }
 
     @Override
@@ -84,12 +90,6 @@ public class User implements Serializable {
                 ", email='" + email + '\'' +
                 ", car=" + car +
                 '}';
-    }
-
-    public void setCar(Car car) {
-        this.car = car;
-
-
     }
 }
 
