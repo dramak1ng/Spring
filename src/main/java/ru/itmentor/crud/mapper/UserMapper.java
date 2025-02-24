@@ -1,8 +1,10 @@
-package web.mapper;
+package ru.itmentor.crud.mapper;
+
+import ru.itmentor.crud.dto.UserDto;
+import ru.itmentor.crud.model.User;
+
 
 import org.springframework.stereotype.Component;
-import web.dto.UserDto;
-import web.model.User;
 @Component
 public class UserMapper {
     public User toEntity(UserDto userDto){

@@ -1,4 +1,4 @@
-package web.dto;
+package ru.itmentor.crud.dto;
 
 public class UserDto {
     private String name;

@@ -1,14 +1,17 @@
-package web.config;
+package ru.itmentor.crud.config;
 
 
+import jakarta.servlet.Filter;
+import org.springframework.web.filter.HiddenHttpMethodFilter;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
+public class AppInit extends AbstractAnnotationConfigDispatcherServletInitializer {
 
-public class Appinit extends AbstractAnnotationConfigDispatcherServletInitializer {
     @Override
     protected Class<?>[] getRootConfigClasses() {
         return null;
     }
+
 
     @Override
     protected Class<?>[] getServletConfigClasses() {
@@ -20,5 +23,12 @@ public class Appinit extends AbstractAnnotationConfigDispatcherServletInitialize
     @Override
     protected String[] getServletMappings() {
         return new String[]{"/"};
+    }
+
+    @Override
+    protected Filter[] getServletFilters() {
+        return new Filter[]{
+                new HiddenHttpMethodFilter()
+        };
     }
 }
