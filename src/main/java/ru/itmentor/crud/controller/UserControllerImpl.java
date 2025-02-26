@@ -9,7 +9,7 @@ import ru.itmentor.crud.service.UserService;
 import static org.springframework.data.jpa.domain.AbstractPersistable_.id;
 
 @Controller
-@RequestMapping("/users")
+
 public class UserControllerImpl implements UserController {
 
     private static final String REDIRECT_URL = "redirect:/users";
@@ -21,7 +21,6 @@ public class UserControllerImpl implements UserController {
     }
 
 
-    @GetMapping
     @Override
     public String getAllUsers(Model model) {
         model.addAttribute("users", userService.getAllUsers());
@@ -30,28 +29,26 @@ public class UserControllerImpl implements UserController {
     }
 
 
-    @PostMapping
+
     @Override
-    public String addUser(@ModelAttribute("userDto") UserDto userDto) {
+    public String saveUser(@ModelAttribute("userDto") UserDto userDto) {
         userService.saveUser(userDto);
         return REDIRECT_URL;
     }
 
-    @DeleteMapping
     @Override
     public String deleteUser(@RequestParam("id") Long userId) {
         userService.deleteUserById(userId);
         return REDIRECT_URL;
     }
 
-    @PutMapping
     @Override
     public String updateUser(@RequestParam("id") Long userId, @ModelAttribute("user") UserDto userDto) {
         userService.updateUser(userId, userDto);
         return REDIRECT_URL;
 
     }
-@GetMapping("/{id}")
+
     @Override
     public String getUserById(@PathVariable Long id, Model model) {
         userService.getUserById(id);

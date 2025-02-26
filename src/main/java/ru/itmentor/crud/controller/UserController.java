@@ -1,18 +1,26 @@
 package ru.itmentor.crud.controller;
 
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import ru.itmentor.crud.dto.UserDto;
 
+@RequestMapping("/users")
 public interface UserController {
+
+    @GetMapping
     String getAllUsers(Model model);
 
-    String addUser(@ModelAttribute("userDto") UserDto userDto);
+    @PostMapping
+    String saveUser(@ModelAttribute("userDto") UserDto userDto);
 
+    @DeleteMapping
     String deleteUser(@RequestParam("id") Long userId);
 
+    @PutMapping
     String updateUser(@RequestParam("id") Long userId, @ModelAttribute("user") UserDto userDto);
-    String getUserById(@PathVariable Long userId, Model model);
+
+    @GetMapping("/{id}")
+    String getUserById(@PathVariable Long id, Model model);
+
+
 }

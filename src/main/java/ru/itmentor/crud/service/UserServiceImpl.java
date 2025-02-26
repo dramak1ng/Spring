@@ -13,50 +13,49 @@ import java.util.List;
 
 
 @Service
-public class UserServiceImpl implements UserService {
+    public class UserServiceImpl implements UserService {
 
-    private final UserMapper userMapper;
-    private final UserRepository userRepository;
+        private final UserRepository userRepository;
 
-    public UserServiceImpl(UserMapper userMapper, UserRepository userRepository) {
-        this.userMapper = userMapper;
-        this.userRepository = userRepository;
-    }
+        public UserServiceImpl(UserRepository userRepository) {
+            this.userRepository = userRepository;
+        }
 
-    @Override
-    public void getUserById(long id) {
-        findUserById(id);
-        userRepository.findById(id).orElseThrow(() -> new UserNotFoundException(id));
-    }
+        @Override
+        public List<User> getAllUsers() {
+            return userRepository.findAll();
+        }
 
-    @Override
-    @Transactional
-    public void saveUser(UserDto userDto) {
-        User user = userMapper.toEntity(userDto);
-        userRepository.save(user);
-    }
+        @Override
+        @Transactional
+        public void saveUser(UserDto userDto) {
+            User user = UserMapper.toEntity(userDto);
+            userRepository.save(user);
+        }
 
-    @Override
-    @Transactional
-    public void deleteUserById(long id) {
-        userRepository.deleteById(id);
-    }
+        @Override
+        @Transactional
+        public void updateUser(Long userId, UserDto userDto) {
+            User user = findUserById(userId);
+            user.setName(userDto.getName());
+            user.setLastName(userDto.getLastName());
+            userRepository.update(user);
+        }
 
-    @Override
-    @Transactional
-    public void updateUser(long id, UserDto userDto) {
-        User user = userMapper.toEntity(userDto);
-        user.setId(findUserById(id).getId());
-        userRepository.save(user);
-    }
+        @Override
+        @Transactional
+        public void deleteUserById(Long userId) {
+            userRepository.delete(userId);
+        }
 
     @Override
-    @Transactional
-    public List<User> getAllUsers() {
-        return userRepository.findAll();
+    public void getUserById(Long userId) {
+        userRepository.getUserById(userId);
     }
 
-    private User findUserById(long id) {
-        return userRepository.findById(id).orElseThrow(() -> new UserNotFoundException(id));
-    }
+    private User findUserById(Long userId) {
+            return userRepository.getUserById(userId)
+                    .orElseThrow(() -> new UserNotFoundException(userId));
+        }
+
 }

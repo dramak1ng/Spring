@@ -3,9 +3,8 @@ package ru.itmentor.crud.model;
 import jakarta.persistence.*;
 
 
-
 @Entity
-@Table(name="users")
+@Table(name = "users")
 public class User {
 
     @Id
@@ -22,17 +21,13 @@ public class User {
 
     }
 
-    public User( String name, String lastName) {
+    public User(String name, String lastName) {
         this.name = name;
         this.lastName = lastName;
     }
 
     public long getId() {
         return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
     }
 
     public String getName() {

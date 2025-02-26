@@ -1,8 +1,18 @@
 package ru.itmentor.crud.repository;
 
-import org.springframework.data.jpa.repository.JpaRepository;
 import ru.itmentor.crud.model.User;
 
+import java.util.List;
+import java.util.Optional;
 
-public interface UserRepository extends JpaRepository<User, Long> {
+public interface UserRepository {
+    void save(User user);
+
+    void update(User user);
+
+    void delete(Long id);
+
+    Optional<User> getUserById(Long id);
+
+    List<User> findAll();
 }
